@@ -1,0 +1,26 @@
+---
+- hosts: lan
+  become: true
+  become_user: root
+  vars:
+    web: httpd
+    ftp: vsftpd
+    firewall: firewalld
+  tasks:
+     - name: Install All Four Pkg
+       yum:
+          name:
+          - "{{ web }}"
+          - "{{ ftp }}"
+          - "{{ firewall }}"
+          state: latest
+
+     - name: Enable Service and Strted
+       service: name={{item}} state=started enabled=true
+       with_items:
+          - httpd
+          - vsftpd
+          - firewalld  
+...        
+
+

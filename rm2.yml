@@ -1,0 +1,20 @@
+---
+- hosts: lan
+  become: true
+  become_user: root
+  vars:
+    web: httpd
+    ftp: vsftpd
+    firewall: firewalld
+  tasks:
+     - name: Install All Four Pkg
+       yum:
+          name:
+          - "{{ web }}"
+          - "{{ ftp }}"
+          - "{{ firewall }}"
+          state: absent
+
+...        
+
+

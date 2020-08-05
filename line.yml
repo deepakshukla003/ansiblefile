@@ -1,0 +1,10 @@
+---
+- hosts: lan
+  become: true
+  become_user: root
+  tasks:
+    - name: Add line in host file
+      lineinfile:
+         path: /srv/hosts
+         line: this written on 15 July 2020
+...    

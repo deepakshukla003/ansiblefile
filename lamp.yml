@@ -1,0 +1,31 @@
+---
+- hosts: lan
+  become: true
+  become_user: root
+  tasks:
+    - name: Intsall httpd
+      yum: name=httpd state=latest
+
+    - name: Install Maria DB
+      yum: name=mariadb* state=latest
+
+    - name: Install python3
+      yum: name=python3 state=latest
+
+    - name: Start Maria DB 
+      service: name=mariadb state=started enabled=true
+
+    - name: Start Httpd
+      service: name=httpd state=started enabled=true
+    
+    - name: maridb Password
+      mysql_user:
+         name: root
+         host: lan
+         password: mysql
+         login_user: root
+         check_implicit_admin: yes
+         priv: "*.*:ALL,GRAMT"
+    - name: Create New DB
+      mysql_db: name=inventory state=present login_user=root login_password=mysql
+...
