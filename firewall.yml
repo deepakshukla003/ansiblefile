@@ -1,0 +1,11 @@
+---
+- name: Install firewall package
+  hosts: lan
+  gather_facts: true
+  become: true
+  tasks:
+     - name: Install Firewalld Pakcges
+       yum:
+          name: firewalld
+          state: present
+...

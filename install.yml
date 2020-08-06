@@ -1,21 +1,11 @@
 ---
 - hosts: lan
   become: true
-  become_user: root
+  gather_facts: true
   tasks:
-    - name: Install 3 package on Server
-      yum: name={{item}} state=latest
-      with_items:
-        - httpd
-        - vsftpd
-        - firewalld
-    - name: After Installing Enable and Start Packages
-      service: name={{item}} state=started enabled=true
-      with_items:
-        - httpd
-        - vsftpd
-        - firewalld
-...
-
-
+  - name: Install using import
+      - import_tasks: vsftp.yml
+      - import_tasks: firewall.yml
+      - import_tasks: httpd.yml
+...  
 
