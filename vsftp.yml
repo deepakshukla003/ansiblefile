@@ -1,0 +1,14 @@
+---
+- name: Instllation using Import Task
+  hosts: lan
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Install vsftpt
+      yum:
+        name: vsftpd 
+        state: present
+...
+      
+
+   

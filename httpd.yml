@@ -1,0 +1,8 @@
+---
+- hosts: lan
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Instll httpd packges
+      yum: name=httpd state=present
+...
